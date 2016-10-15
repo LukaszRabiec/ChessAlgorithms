@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChessAlgorithms.Client")]
+[assembly: AssemblyTitle("KnightTour.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ChessAlgorithms.Client")]
+[assembly: AssemblyProduct("KnightTour.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("18b41b1f-0bec-4557-b6a1-fca28064684e")]
+[assembly: Guid("034c17dc-ba0c-4b40-8c19-73253984fe4f")]
 
 // Version information for an assembly consists of the following four values:
 //

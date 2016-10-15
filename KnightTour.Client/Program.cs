@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using ChessAlgorithms;
 using ChessAlgorithms.EventsHelpers;
 using ChessAlgorithms.Helpers;
 
-namespace ChessAlgorithms.Client
+namespace KnightTour.Client
 {
     class Program
     {

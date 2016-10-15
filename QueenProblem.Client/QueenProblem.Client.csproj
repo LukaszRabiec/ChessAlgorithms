@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18B41B1F-0BEC-4557-B6A1-FCA28064684E}</ProjectGuid>
+    <ProjectGuid>{BA130CBA-71E7-42FD-B72F-C0BDD99A7FB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChessAlgorithms.Client</RootNamespace>
-    <AssemblyName>ChessAlgorithms.Client</AssemblyName>
+    <RootNamespace>QueenProblem.Client</RootNamespace>
+    <AssemblyName>QueenProblem.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
