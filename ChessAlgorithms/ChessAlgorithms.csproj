@@ -45,6 +45,7 @@
     <Compile Include="Helpers\Position.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queen.cs" />
     <Compile Include="Utility\Delegates.cs" />
   </ItemGroup>
   <ItemGroup />
