@@ -10,17 +10,28 @@ namespace ChessAlgorithms
     {
         public event Delegates.FindingProgressChangedEventHandler FindingProgressChanged;
 
-        private readonly int _chessboardSize;
+        private readonly int _chessboardRows;
+        private readonly int _chessboardCols;
         private readonly List<Position> _knightMovements;
         private readonly List<Position> _movesHistory;
         private readonly int[,] _movesBoard;
 
         public Knight(int chessboardSize)
         {
-            _chessboardSize = chessboardSize;
+            _chessboardRows = chessboardSize;
+            _chessboardCols = chessboardSize;
             _knightMovements = InitializeKnightMovements();
             _movesHistory = new List<Position>();
             _movesBoard = new int[chessboardSize, chessboardSize];
+        }
+
+        public Knight(int chessboardRows, int chessboardCols)
+        {
+            _chessboardRows = chessboardRows;
+            _chessboardCols = chessboardCols;
+            _knightMovements = InitializeKnightMovements();
+            _movesHistory = new List<Position>();
+            _movesBoard = new int[chessboardRows, chessboardCols];
         }
 
         public KnightSolution FindSolution(Position startingPosition)
@@ -163,14 +174,21 @@ namespace ChessAlgorithms
 
         private bool MoveIsAvailable(Position newPosition)
         {
-            return CoordIsOnChessboard(newPosition.X)
-                && CoordIsOnChessboard(newPosition.Y)
+            return MoveOnChessboard(newPosition)
                 && FieldIsFree(newPosition);
         }
 
-        private bool CoordIsOnChessboard(int newPositionCoord)
+        private bool MoveOnChessboard(Position newPosition)
         {
-            return (newPositionCoord >= 0) && (newPositionCoord < _chessboardSize);
+            if (newPosition.X >= 0 && newPosition.Y >= 0)
+            {
+                if (newPosition.X < _chessboardRows && newPosition.Y < _chessboardCols)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool FieldIsFree(Position newPosition)

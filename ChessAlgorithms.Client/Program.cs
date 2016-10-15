@@ -10,21 +10,22 @@ namespace ChessAlgorithms.Client
     {
         static void Main(string[] args)
         {
-            int boardSize = 5;
+            const int boardRows = 5;
+            const int boardCols = 5;
             var startingPosition = new Position(2, 2);
 
-            //FindOneSolution(boardSize, startingPosition);
+            //FindOneSolution(boardRows, boardCols, startingPosition);
 
-            FindAllSolution(boardSize, startingPosition);
+            FindAllSolution(boardRows, boardCols, startingPosition);
 
             Console.ReadKey();
         }
 
-        private static void FindOneSolution(int boardSize, Position startingPosition)
+        private static void FindOneSolution(int boardRows, int boardCols, Position startingPosition)
         {
             KnightSolution solution;
 
-            var knight = new Knight(boardSize);
+            var knight = new Knight(boardRows, boardCols);
 
             try
             {
@@ -42,11 +43,11 @@ namespace ChessAlgorithms.Client
             PrintHistory(solution.MovesHistory);
         }
 
-        private static void FindAllSolution(int boardSize, Position startingPosition)
+        private static void FindAllSolution(int boardRows, int boardCols, Position startingPosition)
         {
             List<KnightSolution> solutions;
 
-            var knight = new Knight(boardSize);
+            var knight = new Knight(boardRows, boardCols);
             knight.FindingProgressChanged += OnFindingProgressChanged;
 
             try
