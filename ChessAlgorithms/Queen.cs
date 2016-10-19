@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ChessAlgorithms
 {
@@ -9,11 +10,11 @@ namespace ChessAlgorithms
     //    Open your IDE, look up to this code and see...
     public class Queen
     {
-        private int[] _positionInColumn;
-        private bool[] _isFreeRow;
-        private bool[] _isFreeFirstDiagonal;
-        private bool[] _isFreeSecondDiagonal;
-        private int _boardSize;
+        private readonly int[] _positionInColumn;
+        private readonly bool[] _isFreeRow;
+        private readonly bool[] _isFreeFirstDiagonal;
+        private readonly bool[] _isFreeSecondDiagonal;
+        private readonly int _boardSize;
 
         public Queen(int boardSize)
         {
@@ -24,13 +25,23 @@ namespace ChessAlgorithms
             _isFreeSecondDiagonal = Enumerable.Repeat(true, 2 * boardSize - 1).ToArray();
         }
 
-        public int[] FindSolution()
+        public int[] FindOneSolution()
         {
             bool isFinished = false;
 
             TryToPlace(0, ref isFinished);
 
             return _positionInColumn;
+        }
+
+        public List<int[]> FindAllSolutions()
+        {
+            bool isFinished = false;
+
+            var solutions = new List<int[]>();
+            TryToPlaceManyTimes(0, ref isFinished, solutions);
+
+            return solutions;
         }
 
         private void TryToPlace(int iteration, ref bool isFinished)
@@ -46,7 +57,7 @@ namespace ChessAlgorithms
                     PlaceQueenOnField(iteration, positionIndex);
                     SetRowAndDiagonals(positionIndex, firstDiagonalIndex, secondDiagonalIndex, false);
 
-                    if (iteration < _boardSize)
+                    if (iteration < _boardSize - 1)
                     {
                         TryToPlace(iteration + 1, ref isFinished);
 
@@ -58,6 +69,38 @@ namespace ChessAlgorithms
                     else
                     {
                         isFinished = true;
+                    }
+                }
+            }
+        }
+
+        private void TryToPlaceManyTimes(int iteration, ref bool isFinished, List<int[]> solutions)
+        {
+            for (int positionIndex = 0; positionIndex < _boardSize && !isFinished; positionIndex++)
+            {
+                isFinished = false;
+                int firstDiagonalIndex = iteration + positionIndex;
+                int secondDiagonalIndex = iteration - positionIndex + _boardSize - 1;
+
+                if (CanPlaceQueen(positionIndex, firstDiagonalIndex, secondDiagonalIndex))
+                {
+                    PlaceQueenOnField(iteration, positionIndex);
+                    SetRowAndDiagonals(positionIndex, firstDiagonalIndex, secondDiagonalIndex, false);
+
+                    if (iteration < _boardSize - 1)
+                    {
+                        TryToPlaceManyTimes(iteration + 1, ref isFinished, solutions);
+
+                        if (!isFinished)
+                        {
+                            SetRowAndDiagonals(positionIndex, firstDiagonalIndex, secondDiagonalIndex, true);
+                        }
+                    }
+                    else
+                    {
+                        solutions.Add((int[])_positionInColumn.Clone());
+                        _positionInColumn[iteration] = 0;
+                        SetRowAndDiagonals(positionIndex, firstDiagonalIndex, secondDiagonalIndex, true);
                     }
                 }
             }

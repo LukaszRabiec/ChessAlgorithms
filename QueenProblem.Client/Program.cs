@@ -9,15 +9,37 @@ namespace QueenProblem.Client
         {
             const int boardSize = 8;
 
-            var queen = new Queen(boardSize);
-            var positions = queen.FindSolution();
+            //FindOneSolution(boardSize);
 
-            PrintPositions(positions);
+            FindAllSolutions(boardSize);
 
             Console.ReadKey();
         }
 
-        private static void PrintPositions(int[] positions)
+        private static void FindOneSolution(int boardSize)
+        {
+            var queen = new Queen(boardSize);
+            var solution = queen.FindOneSolution();
+
+            PrintPositions(solution, PrintType.Numeric);
+        }
+
+        private static void FindAllSolutions(int boardSize)
+        {
+            var queen = new Queen(boardSize);
+            var solutions = queen.FindAllSolutions();
+
+            for (int i = 0; i < solutions.Count; i++)
+            {
+                Console.WriteLine($"Solution #{i}:");
+                PrintPositions(solutions[i], PrintType.Char);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine($"Found {solutions.Count} solutions.");
+        }
+
+        private static void PrintPositions(int[] positions, PrintType printType)
         {
             for (int row = 0; row < positions.Length; row++)
             {
@@ -25,8 +47,7 @@ namespace QueenProblem.Client
                 {
                     if (row == positions[col])
                     {
-                        //Console.Write($"{'H',3} ");
-                        Console.Write($"{positions[col],3} ");
+                        Console.Write(printType == PrintType.Char ? $"{'H',3} " : $"{positions[col],3} ");
                     }
                     else
                     {
@@ -36,6 +57,12 @@ namespace QueenProblem.Client
 
                 Console.WriteLine();
             }
+        }
+
+        private enum PrintType
+        {
+            Char,
+            Numeric
         }
     }
 }
